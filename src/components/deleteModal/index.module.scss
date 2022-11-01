@@ -1,0 +1,40 @@
+@import "../../styles/global.scss";
+
+.buttons {
+    @include centerFlexR;
+    @include size(100%, 250px, 500px, fit-content, none, none);
+    div {
+      @include size(50%, none, none, fit-content, none, none);
+      @include centerFlexR;
+      &:first-child {
+        button {
+          @include button(secondary);
+        }
+      
+      }
+      &:last-child{
+        button {
+          @include button(primary);
+        }
+      }
+    }
+  }
+
+  .modalWrapper{
+    position: fixed;
+    top: 0;
+    left: 0;
+    @include size(100vw, none, none, 100vh, none, none);
+    background: rgba(0, 0, 0, 0.33);
+    z-index: 10;
+    @include centerFlexC
+  }
+
+  .modalContainer{
+    @include size(100%,none, 270px, 100%, 200px, 200px);
+    border-radius: 1rem;
+    gap: 2rem;
+    color: $white;
+    background: $grey;
+    @include centerFlexC
+  }

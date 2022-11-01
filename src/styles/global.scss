@@ -1,0 +1,56 @@
+$black: #171717;
+$grey: #444444;
+$red: #da0037;
+$white: hsl(0, 0%, 93%);
+@mixin size($width, $minWidth, $maxWidth, $height, $minheight, $maxheight) {
+  width: $width;
+  max-width: $maxWidth;
+  min-width: $minWidth;
+  height: $height;
+  min-height: $minheight;
+  max-height: $maxheight;
+}
+@mixin mq($val) {
+  @media (max-width: $val) {
+    @content;
+  }
+}
+@mixin button($type) {
+  @include size(120px, unset, unset, 48px, unset, unset);
+  border-radius: 5px;
+  cursor: pointer;
+  @if $type == primary {
+    background: $red;
+    color: $white;
+  } @else if $type == secondary {
+    background: $white;
+    color: $grey;
+    border: 1px solid $grey;
+  } @else if $type == tertiary {
+    background: none;
+    color: grey;
+    text-decoration: underline 2px $grey;
+  }
+}
+@mixin input() {
+  @include size(100%, 120px, 170px, 38px, none, none);
+  border-radius: 5px;
+  border: 2px solid $grey;
+  padding: 5px;
+}
+@mixin label {
+  color: $white;
+}
+
+@mixin centerFlexR() {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+}
+@mixin centerFlexC() {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}

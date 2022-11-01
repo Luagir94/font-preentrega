@@ -1,0 +1,82 @@
+@import "../../styles/global.scss";
+.issueDesc {
+  @include size(100%, 300px, 600px, 100%, 400px, 400px);
+  border-radius: 1rem;
+  background: $grey;
+  padding: 1rem;
+  @include centerFlexC;
+  gap: 1rem;
+}
+
+.listContainer {
+  @include size(100%, 250px, 500px, 300px, 300px, none);
+  justify-items: flex-start;
+
+  border-radius: 8px;
+  position: relative;
+  textarea {
+    @include size(100%, none, none, 100%, none, none);
+    background: none;
+    resize: none;
+  }
+  & > div {
+    &:first-child {
+      @include size(100%, 250px, 500px, 20%, none, none);
+      @include centerFlexR;
+      & > div {
+        @include size(70%, none, none, 100%, none, none);
+        @include centerFlexR;
+        &:first-child {
+          @include size(30%, none, none, 100%, none, none);
+        }
+
+        color: $white;
+        font-weight: 500;
+        gap: 1rem;
+        select {
+          @include input;
+        }
+      }
+    }
+    &:last-child {
+      @include size(100%, 250px, 500px, 80%, none, none);
+      border-radius: 8px;
+      background: $white;
+      padding: 1rem;
+    }
+  }
+}
+
+.delete {
+  @include centerFlexC;
+}
+.edit {
+  @include centerFlexC;
+}
+
+.buttons {
+  @include centerFlexR;
+  @include size(100%, 250px, 500px, fit-content, none, none);
+  div {
+    @include size(50%, none, none, fit-content, none, none);
+    @include centerFlexR;
+    &:first-child {
+      button {
+        @include button(secondary);
+      }
+    
+    }
+    &:last-child{
+      button {
+        @include button(primary);
+      }
+    }
+  }
+}
+
+.link {
+  cursor: pointer;
+  &:hover {
+    text-decoration: 2px underline $grey;
+  }
+}

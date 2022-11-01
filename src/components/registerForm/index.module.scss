@@ -1,0 +1,36 @@
+@import '../../styles/global.scss';
+.registerForm{
+@include size(100%,400px, 600px, 100%, 400px, 400px);
+border-radius: 1rem;
+background: $grey;
+@include centerFlexC
+}
+
+.form{
+    @include size(100%,350px, 350px, fit-content, 200px, none);
+    @include centerFlexC;
+    div{
+        @include centerFlexC;
+        @include size(100%,none, none, fit-content, 100px, none);
+        align-items: flex-start;
+        &:last-child{
+            @include centerFlexR;
+            gap: 2rem;
+        } 
+    }
+    input{
+        @include input
+    }
+    label{
+        @include label
+    }
+    button{
+        &:first-child{
+            @include button(secondary)
+        }
+        &:last-child{
+            @include button(primary)
+        }
+        
+    }
+}

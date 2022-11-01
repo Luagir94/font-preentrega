@@ -1,0 +1,82 @@
+@import "../../styles/global.scss";
+.issuesList {
+  @include size(100%, 300px, 600px, 100%, 400px, 400px);
+  border-radius: 1rem;
+  background: $grey;
+  padding: 1rem;
+  @include centerFlexC;
+  gap: 1rem
+}
+
+.listContainer {
+  @include size(100%, 250px, 500px, 300px, 300px, none);
+  justify-items: flex-start;
+  overflow-y: auto;
+  border-radius: 8px;
+  position: relative;
+}
+
+.card {
+  @include centerFlexR;
+  @include size(100%, none, none, 3rem, none, none);
+  background: $white;
+  color: $black;
+
+  & > div {
+    &:first-child {
+      @include size(15%, none, none, 100%, none, none);
+      @include centerFlexR;
+    }
+    &:nth-child(2) {
+      @include size(55%, none, none, 100%, none, none);
+      @include centerFlexR;
+    }
+    &:nth-child(3) {
+      @include size(15%, none, none, 100%, none, none);
+      @include centerFlexR;
+      flex-wrap: wrap;
+      img {
+        @include size(20px, none, none, 20px, none, none);
+
+        filter: brightness(0) saturate(100%);
+        cursor: pointer;
+      }
+    }
+    &:last-child {
+      @include size(15%, none, none, 100%, none, none);
+      @include centerFlexR;
+      img {
+        cursor: pointer;
+        @include size(20px, none, none, 20px, none, none);
+        filter: brightness(0) saturate(100%) invert(17%) sepia(78%)
+          saturate(3928%) hue-rotate(353deg) brightness(99%) contrast(133%);
+      }
+    }
+  }
+  &:first-child {
+    background: $red;
+    color: $white;
+    font-size: .8rem;
+    position: sticky;
+    top: 0;
+    z-index: 2;
+  }
+}
+.delete{
+    @include centerFlexC; 
+}
+.edit{
+    @include centerFlexC;   
+}
+
+.buttons{
+
+    button{
+        @include button(primary)
+    }
+}
+
+.link{
+    cursor: pointer;
+    &:hover {text-decoration: 2px underline $grey;
+}}

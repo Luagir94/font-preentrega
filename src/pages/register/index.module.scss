@@ -1,0 +1,7 @@
+@import '../../styles/global.scss';
+
+.pageWrapper{
+    @include centerFlexR;
+    height: 100vh;
+    padding: 1rem;
+}
