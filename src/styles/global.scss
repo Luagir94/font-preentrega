@@ -4,11 +4,23 @@ $red: #da0037;
 $white: #ededed;
 @mixin size($width, $minWidth, $maxWidth, $height, $minheight, $maxheight) {
   width: $width;
-  max-width: $maxWidth;
-  min-width: $minWidth;
   height: $height;
-  min-height: $minheight;
-  max-height: $maxheight;
+  @if $minWidth != none {
+    min-width: $minWidth;
+  }
+  @if $maxWidth != none {
+    max-width: $maxWidth;
+  }
+  @if $minheight != none {
+    min-height: $minheight;
+  }
+  @if $maxheight != none {
+       max-height: $maxheight;
+  }
+ 
+ 
+ 
+
 }
 @mixin mq($val) {
   @media (max-width: $val) {
