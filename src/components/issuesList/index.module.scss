@@ -14,6 +14,7 @@
   overflow-y: auto;
   border-radius: 8px;
   position: relative;
+  background: $white
 }
 
 .card {
@@ -80,3 +81,8 @@
     cursor: pointer;
     &:hover {text-decoration: 2px underline $grey;
 }}
+
+.emptyIssues{
+  @include size(100%, none,none, 100%, none, none);
+  @include centerFlexC
+}

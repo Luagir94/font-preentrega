@@ -1,6 +1,6 @@
 @import '../../styles/global.scss';
 .loginForm{
-@include size(100%,400px, 600px, 100%, 400px, 400px);
+@include size(100%,none, 400px, 100%, none, 275px);
 border-radius: 1rem;
 background: $grey;
 @include centerFlexC
@@ -10,9 +10,11 @@ background: $grey;
     @include size(100%,350px, 350px, fit-content, 200px, none);
     @include centerFlexC;
     div{
-        @include centerFlexC;
-        @include size(100%,none, none, fit-content, 100px, none);
-        align-items: flex-start;
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+        @include size(100%,none, none, fit-content, 75px, none);
+
         &:last-child{
             @include centerFlexR;
             gap: 2rem;

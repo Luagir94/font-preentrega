@@ -2,8 +2,11 @@ import React, { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import styles from './index.module.scss'
 import apiCalls from '../../api'
-import DeleteModal from '../deleteModal'
+import Modal from '../modal'
+import { ColorRing } from 'react-loader-spinner'
+import { useAuth } from '../../context/authContext'
 const IssuesList = () => {
+    const { token } = useAuth()
     const [data, setData] = useState([])
     const [itemToDelete, setItemToDelete] = useState({})
     const [modal, setModal] = useState(false)
@@ -12,261 +15,106 @@ const IssuesList = () => {
 
 
     const handleModal = () => setModal(!modal)
-    useEffect(() => {
+    const selectItem = (x) => {
+        setItemToDelete(x)
+        setModal(!modal)
+    }
+    const deleteItem = async () => {
+        try {
+            await apiCalls.delete(token, `issues/${itemToDelete.id}`)
+            const refreshData = data.filter(x => itemToDelete.id !== x.id)
+            setData(refreshData)
+            handleModal()
+        } catch (error) {
 
-    }, [])
+        }
+    }
+    useEffect(() => {
+        const getData = async () => {
+            setLoading(true)
+            try {
+                const req = await apiCalls.get(token, `issues`)
+                setData(req.data)
+                setLoading(false)
+            } catch (error) {
+                setLoading(false)
+            }
+
+        }
+        getData()
+    })
 
 
     return (
         <>
-        {modal && <DeleteModal
-         handleModal={handleModal}
-         itemToDelete={itemToDelete}
-         />}
-        <div className={styles.issuesList}>
-            <div className={styles.listContainer}>
-                <div className={styles.card}>
-                    <div>
-                        <p>ID</p>
-                    </div>
-                    <div>
-                        <p>Title</p>
-                    </div>
-                    <div>
-                        <p>View</p>
-                        <p>/Edit</p>
-                    </div>
-                    <div>
+            {modal && <Modal
+                handleModal={handleModal}
+                action={deleteItem}
+                data={itemToDelete}
+                operation={'delete'}
+            />}
+            <div className={styles.issuesList}>
+                <div className={styles.listContainer}>
+                    {data.length
+                        ?
+                        <>
+                            <div className={styles.card}>
+                                <div>
+                                    <p>ID</p>
+                                </div>
+                                <div>
+                                    <p>Title</p>
+                                </div>
+                                <div>
+                                    <p>View</p>
+                                    <p>/Edit</p>
+                                </div>
+                                <div>
 
-                        <p>Delete</p>
+                                    <p>Delete</p>
 
-                    </div>
-                </div>
-                <div className={styles.card}>
-                    <div>
-                        <p>22</p>
-                    </div>
-                    <div>
-                        <p>Issue 1</p>
-                    </div>
-                    <div>
-                        <button className={styles.edit} onClick={()=>navigate(`/issue-detail/22`)}>
-                            <img src="/assets/edit.svg" alt="" />
-                        </button>
-                    </div>
-                    <div>
-                        <button className={styles.delete} onClick={handleModal}>
-                            <img src="/assets/delete.svg" alt="" />
-                        </button>
-                    </div>
-                </div>
-                <div className={styles.card}>
-                    <div>
-                        <p>22</p>
-                    </div>
-                    <div>
-                        <p>Issue 1</p>
-                    </div>
-                    <div>
-                        <button className={styles.edit}>
-                            <img src="/assets/edit.svg" alt="" />
-                        </button>
-                    </div>
-                    <div>
-                        <button className={styles.delete}>
-                            <img src="/assets/delete.svg" alt="" />
-                        </button>
-                    </div>
-                </div>
-                <div className={styles.card}>
-                    <div>
-                        <p>22</p>
-                    </div>
-                    <div>
-                        <p>Issue 1</p>
-                    </div>
-                    <div>
-                        <button className={styles.edit}>
-                            <img src="/assets/edit.svg" alt="" />
-                        </button>
-                    </div>
-                    <div>
-                        <button className={styles.delete}>
-                            <img src="/assets/delete.svg" alt="" />
-                        </button>
-                    </div>
-                </div>
-                <div className={styles.card}>
-                    <div>
-                        <p>22</p>
-                    </div>
-                    <div>
-                        <p>Issue 1</p>
-                    </div>
-                    <div>
-                        <button className={styles.edit}>
-                            <img src="/assets/edit.svg" alt="" />
-                        </button>
-                    </div>
-                    <div>
-                        <button className={styles.delete}>
-                            <img src="/assets/delete.svg" alt="" />
-                        </button>
-                    </div>
-                </div>
-                <div className={styles.card}>
-                    <div>
-                        <p>22</p>
-                    </div>
-                    <div>
-                        <p>Issue 1</p>
-                    </div>
-                    <div>
-                        <button className={styles.edit}>
-                            <img src="/assets/edit.svg" alt="" />
-                        </button>
-                    </div>
-                    <div>
-                        <button className={styles.delete}>
-                            <img src="/assets/delete.svg" alt="" />
-                        </button>
-                    </div>
-                </div>
-                <div className={styles.card}>
-                    <div>
-                        <p>22</p>
-                    </div>
-                    <div>
-                        <p>Issue 1</p>
-                    </div>
-                    <div>
-                        <button className={styles.edit}>
-                            <img src="/assets/edit.svg" alt="" />
-                        </button>
-                    </div>
-                    <div>
-                        <button className={styles.delete}>
-                            <img src="/assets/delete.svg" alt="" />
-                        </button>
-                    </div>
-                </div>
-                <div className={styles.card}>
-                    <div>
-                        <p>22</p>
-                    </div>
-                    <div>
-                        <p>Issue 1</p>
-                    </div>
-                    <div>
-                        <button className={styles.edit}>
-                            <img src="/assets/edit.svg" alt="" />
-                        </button>
-                    </div>
-                    <div>
-                        <button className={styles.delete}>
-                            <img src="/assets/delete.svg" alt="" />
-                        </button>
-                    </div>
-                </div>
-                <div className={styles.card}>
-                    <div>
-                        <p>22</p>
-                    </div>
-                    <div>
-                        <p>Issue 1</p>
-                    </div>
-                    <div>
-                        <button className={styles.edit}>
-                            <img src="/assets/edit.svg" alt="" />
-                        </button>
-                    </div>
-                    <div>
-                        <button className={styles.delete}>
-                            <img src="/assets/delete.svg" alt="" />
-                        </button>
-                    </div>
-                </div>
-                <div className={styles.card}>
-                    <div>
-                        <p>22</p>
-                    </div>
-                    <div>
-                        <p>Issue 1</p>
-                    </div>
-                    <div>
-                        <button className={styles.edit}>
-                            <img src="/assets/edit.svg" alt="" />
-                        </button>
-                    </div>
-                    <div>
-                        <button className={styles.delete}>
-                            <img src="/assets/delete.svg" alt="" />
-                        </button>
-                    </div>
-                </div>
-                <div className={styles.card}>
-                    <div>
-                        <p>22</p>
-                    </div>
-                    <div>
-                        <p>Issue 1</p>
-                    </div>
-                    <div>
-                        <button className={styles.edit}>
-                            <img src="/assets/edit.svg" alt="" />
-                        </button>
-                    </div>
-                    <div>
-                        <button className={styles.delete}>
-                            <img src="/assets/delete.svg" alt="" />
-                        </button>
-                    </div>
-                </div>
-                <div className={styles.card}>
-                    <div>
-                        <p>22</p>
-                    </div>
-                    <div>
-                        <p>Issue 1</p>
-                    </div>
-                    <div>
-                        <button className={styles.edit}>
-                            <img src="/assets/edit.svg" alt="" />
-                        </button>
-                    </div>
-                    <div>
-                        <button className={styles.delete}>
-                            <img src="/assets/delete.svg" alt="" />
-                        </button>
-                    </div>
-                </div>
-                <div className={styles.card}>
-                    <div>
-                        <p>22</p>
-                    </div>
-                    <div>
-                        <p>Issue 1</p>
-                    </div>
-                    <div>
-                        <button className={styles.edit}>
-                            <img src="/assets/edit.svg" alt="" />
-                        </button>
-                    </div>
-                    <div>
-                        <button className={styles.delete}>
-                            <img src="/assets/delete.svg" alt="" />
-                        </button>
-                    </div>
-                </div>
+                                </div>
+                            </div>
+                            {data?.map(x => <div key={x.id} className={styles.card}>
+                                <div>
+                                    <p>{x.id}</p>
+                                </div>
+                                <div>
+                                    <p>{x.name}</p>
+                                </div>
+                                <div>
+                                    <button className={styles.edit} onClick={() => navigate(`/issue-detail/${x.id}`)}>
+                                        <img src="/assets/edit.svg" alt="" />
+                                    </button>
+                                </div>
+                                <div>
+                                    <button className={styles.delete} onClick={() => selectItem(x)}>
+                                        <img src="/assets/delete.svg" alt="" />
+                                    </button>
+                                </div>
+                            </div>)}
+                        </>
+                        :
+                        <div className={styles.emptyIssues}>{loading ?
+                            <ColorRing
+                                visible={true}
+                                height="80"
+                                width="80"
+                                ariaLabel="blocks-loading"
+                                wrapperClass="blocks-wrapper"
+                                colors={['#171717', '#da0037', '#ededed', '#171717', '#da0037', '#ededed']}
+                            /> : 'No issues at the momment'}</div>
+                    }
 
-        
+
+
+                </div>
+                <div className={styles.buttons}>
+                    <button onClick={() => navigate("/new-issue")}>New Issue</button>
+                </div>
             </div>
-            <div className={styles.buttons}>
-                <button onClick={()=>navigate("/new-issue")}>New Issue</button>
-            </div>
-        </div>
         </>
-        
+
     )
 }
 

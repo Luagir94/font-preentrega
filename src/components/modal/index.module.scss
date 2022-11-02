@@ -35,6 +35,16 @@
     border-radius: 1rem;
     gap: 2rem;
     color: $white;
-    background: $grey;
+    background: $white;
     @include centerFlexC
+  }
+  .error{
+    color: red;
+    font-weight: 600;
+    text-align: center;
+  }
+  .success{
+    color: green;
+    font-weight: 600;
+    text-align: center;
   }

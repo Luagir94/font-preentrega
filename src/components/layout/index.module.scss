@@ -1,0 +1,16 @@
+@import "../../styles/global.scss";
+.layout {
+  @include size(100%, none, none, 100vh, none, none);
+  background: $red;
+  @include centerFlexC;
+  gap: 1rem;
+  position: relative;
+}
+
+.logout{
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  @include button(secondary);
+  font-weight: 700;
+}
