@@ -62,7 +62,7 @@ const LoginForm = () => {
                         />
                         :
                         <>
-                            <button type='button' onClick={() => navigate("/register")}>Crear Cuenta</button>
+                            <button type='button' onClick={() => navigate("/register")}>Create Account</button>
                             <button type='submit'>Login</button>
                         </>
                     }

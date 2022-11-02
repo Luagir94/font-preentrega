@@ -72,8 +72,8 @@ const RegisterForm = () => {
                         />
                         :
                         <>
-                            <button type='button' onClick={() => navigate("/")}>Login</button>
-                            <button type='submit'>Crear Cuenta</button>
+                            <button type='button' onClick={() => navigate("/")}>Go To Login</button>
+                            <button type='submit'>Register</button>
                         </>
                     }
                 </div>
