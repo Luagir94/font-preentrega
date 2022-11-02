@@ -9,6 +9,7 @@ background: $grey;
 .form{
     @include size(100%,350px, 350px, fit-content, 200px, none);
     @include centerFlexC;
+    padding: 1rem;
     div{
         display: flex;
         justify-content: space-between;
